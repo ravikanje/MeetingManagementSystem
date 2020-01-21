@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+.error{
+    color: #FF0000;
+  }
+
+ .hidden{
+    display: none;
+  }
+
+  .formborder{
+    border: 1px solid lightgreen;
+    padding-bottom: 4px;
+  }
+  

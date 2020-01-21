@@ -1,0 +1,32 @@
+<div class="row">
+  <div class=" col-lg-2 col-md-2"></div>
+  <div class=" col-lg-8 col-md-8 formborder">
+    <h5 style="margin: auto;text-align:center"> Meeting Details</h5>
+    <hr>
+    <button class="btn btn-primary center-block"  (click)="addMeeting()"> Add Meeting</button>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+      <tr>
+        <th  class="hidden">Id</th>
+        <th>Meeting Subject</th>
+        <th>Attendees</th>
+        <th>Meeting Agenda</th>
+        <th>Date Time</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let m of meetingList">
+        <td class="hidden">{{m.MeetingId}}</td>
+        <td>{{m.MeetingSubject}}</td>
+        <td>{{m.MeetingAttendees}}</td>
+        <td>{{m.MeetingAgenda}}</td>
+        <td>{{m.MeetingDateTime | date:'short'}}</td>           
+        <td><button class="btn btn-primary center-block" (click)="updateMeeting(m)"> Update</button>
+          </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class=" col-lg-2 col-md-2"></div>
+  </div>
+</div>
