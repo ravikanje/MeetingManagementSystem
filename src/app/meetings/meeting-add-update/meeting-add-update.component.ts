@@ -22,8 +22,7 @@ export class MeetingAddComponent implements OnInit {
   this.selMeeting = navigation.extras.state;
   }
   ngOnInit() {
-
-    this.addForm = this.formBuilder.group({
+     this.addForm = this.formBuilder.group({
       MeetingId : [0],
       MeetingSubject: ['', [Validators.required, Validators.maxLength(50)]],
       MeetingAttendees: ['', Validators.required],
@@ -51,14 +50,14 @@ export class MeetingAddComponent implements OnInit {
   }
 
    onSubmit() {
-      if (this.addForm.invalid) {
+      if (!this.validateDate() || this.addForm.invalid ) {
         return;
       }
      // if user selects existing record then update
       if (this.isRecordExists) {
           this.apiService.updateMeeting(this.addForm.value)
           .subscribe( data => {
-            if ( data.status === 200 ) { alert( 'Data saved successfully'); }
+            if ( data.status === 200 ) { alert( 'Data updated successfully'); }
             this.router.navigate(['meeting-list']);
           });
       } else {  // new record
@@ -91,4 +90,26 @@ export class MeetingAddComponent implements OnInit {
   resetForm()  {
     this.addForm.reset();
   }
+
+  validateDate(): boolean {
+      const selDate: any  = this.addForm.get('MeetingDateTime').value;
+      if ( this.compareDate(selDate, new Date()) === -1) {
+        alert('Meeting Date cannot be less than today date');
+        return;
+      } else {
+        return true;
+      }
+  }
+
+  compareDate(date1: Date, date2: Date): number {
+    // With Date object we can compare dates them using the >, <, <= or >=.
+    // The ==, !=, ===, and !== operators require to use date.getTime(),
+    // so we need to create a new instance of Date with 'new Date()'
+      const d1 = new Date(date1);
+      const d2  = new Date(date2);
+    // Check if the first is less than second
+      if (d1 < d2) {
+      return -1;
+  }
+}
 }

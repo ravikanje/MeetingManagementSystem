@@ -30,4 +30,7 @@ getAttendeeList(): Observable<ApiResponse> {
     return this.http.put<ApiResponse>(this.baseUrl, meetingObj);
   }
 
+  deleteMeeting(meetingId: number): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(this.baseUrl + meetingId);
+  }
 }

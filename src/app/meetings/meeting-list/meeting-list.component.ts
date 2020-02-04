@@ -11,10 +11,7 @@ export class MeetingListComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.apiService.getMeetingList()
-    .subscribe( data => {
-      this.meetingList = data.result;
-    });
+     this.getMeetingList();
   }
   // on click of add meeting button navgigate user to add-update meeting screen
   addMeeting(): void {
@@ -26,5 +23,21 @@ export class MeetingListComponent implements OnInit {
   const navigationExtras: NavigationExtras = {state: meeting};
       // tslint:disable-next-line:align
       this.router.navigate(['meeting-add-update'], navigationExtras);
+  }
+  // on click of delete button remove meeting details from db.
+  deleteMeeting(meetingId: number): void {
+      this.apiService.deleteMeeting(meetingId)
+      .subscribe( data => {
+        if ( data.status === 200 ) {
+          alert( 'Meeting delete successfully');
+          this.getMeetingList();
+        }
+      });
+  }
+  getMeetingList(): void {
+    this.apiService.getMeetingList()
+    .subscribe( data => {
+      this.meetingList = data.result;
+    });
   }
 }

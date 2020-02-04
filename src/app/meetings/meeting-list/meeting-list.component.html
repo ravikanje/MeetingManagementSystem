@@ -22,8 +22,9 @@
         <td>{{m.MeetingAttendees}}</td>
         <td>{{m.MeetingAgenda}}</td>
         <td>{{m.MeetingDateTime | date:'short'}}</td>           
-        <td><button class="btn btn-primary center-block" (click)="updateMeeting(m)"> Update</button>
-          </td>
+        <td style="white-space: nowrap;"><button class="btn btn-primary center-block" (click)="updateMeeting(m)"> Update</button>
+         &nbsp;<button class="btn btn-primary center-block" (click)="deleteMeeting(m.MeetingId)"> Delete</button>
+        </td>
       </tr>
       </tbody>
     </table>
